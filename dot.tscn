@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://bghpnipwneg3d"]
+
+[ext_resource type="Script" uid="uid://bm2tblgeeksbh" path="res://dot.gd" id="1_o7bw8"]
+[ext_resource type="Texture2D" uid="uid://doq1qbu72onol" path="res://assets/WhiteCircle.png" id="1_swi4y"]
+[ext_resource type="Shader" uid="uid://r0y07ebc06xn" path="res://dot.gdshader" id="2_ippvd"]
+[ext_resource type="Script" uid="uid://bapr5q1x23q4i" path="res://white_circle.gd" id="4_ippvd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h78yx"]
+shader = ExtResource("2_ippvd")
+shader_parameter/replace_color = Color(1, 1, 1, 1)
+
+[node name="Dot" type="Node2D"]
+script = ExtResource("1_o7bw8")
+
+[node name="WhiteCircle" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_h78yx")
+texture = ExtResource("1_swi4y")
+script = ExtResource("4_ippvd")
