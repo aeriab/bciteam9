@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3juidao877l1"]
+[gd_scene load_steps=6 format=3 uid="uid://d3juidao877l1"]
 
 [ext_resource type="Script" uid="uid://c58uwo5cqmfmw" path="res://main_game.gd" id="1_1oj5k"]
 [ext_resource type="Script" uid="uid://dwlwp73fpd15a" path="res://scores_output.gd" id="2_yx7mw"]
 [ext_resource type="Script" uid="uid://bf3jrn1uyjmvd" path="res://mistakes_output.gd" id="3_6bm6p"]
 [ext_resource type="Script" uid="uid://dkffke1sh2a0h" path="res://date_output.gd" id="3_ykeeq"]
+[ext_resource type="Script" uid="uid://dw75eo4h7mnpb" path="res://audio_stream_player.gd" id="5_dugkq"]
 
 [node name="main_game" type="Node2D"]
 script = ExtResource("1_1oj5k")
@@ -11,31 +12,37 @@ script = ExtResource("1_1oj5k")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="hard_stop_timer" type="Timer" parent="."]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="HomeLabels" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+offset_top = -90.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = -50.0
 
 [node name="InstructionLabel" type="Label" parent="HomeLabels"]
-offset_left = -370.0
-offset_top = -309.0
-offset_right = 350.0
-offset_bottom = -252.0
+layout_mode = 0
+offset_left = -386.0
+offset_top = -221.0
+offset_right = 380.0
+offset_bottom = -164.0
 theme_override_font_sizes/font_size = 41
-text = "Press SPACE when a red dot appears"
+text = "Press SPACE when a GREEN dot appears"
 
 [node name="StartButton" type="Button" parent="HomeLabels"]
-offset_left = -364.0
-offset_top = -223.0
-offset_right = 351.0
-offset_bottom = -110.0
-theme_override_font_sizes/font_size = 76
+layout_mode = 0
+offset_left = -259.0
+offset_top = -154.0
+offset_right = 246.0
+offset_bottom = -77.0
+theme_override_font_sizes/font_size = 50
 text = "START DIAGNOSTIC"
 
 [node name="ScoresOutput" type="Label" parent="HomeLabels"]
+layout_mode = 0
 offset_left = -405.0
 offset_top = 63.0
 offset_right = 175.0
@@ -45,6 +52,7 @@ text = "None"
 script = ExtResource("2_yx7mw")
 
 [node name="MistakesOutput" type="Label" parent="HomeLabels"]
+layout_mode = 0
 offset_left = -78.0
 offset_top = 63.0
 offset_right = 502.0
@@ -53,6 +61,7 @@ theme_override_font_sizes/font_size = 21
 script = ExtResource("3_6bm6p")
 
 [node name="DateOutput" type="Label" parent="HomeLabels"]
+layout_mode = 0
 offset_left = 266.0
 offset_top = 63.0
 offset_right = 846.0
@@ -61,6 +70,7 @@ theme_override_font_sizes/font_size = 21
 script = ExtResource("3_ykeeq")
 
 [node name="ScoresLabel" type="Label" parent="HomeLabels"]
+layout_mode = 0
 offset_left = -243.0
 offset_top = -42.0
 offset_right = 245.0
@@ -70,6 +80,7 @@ text = "Past scores:"
 horizontal_alignment = 1
 
 [node name="ReactionLabel" type="Label" parent="HomeLabels"]
+layout_mode = 0
 offset_left = -406.0
 offset_top = 30.0
 offset_right = -231.0
@@ -77,6 +88,7 @@ offset_bottom = 53.0
 text = "Average reaction time:"
 
 [node name="MistakesLabel" type="Label" parent="HomeLabels"]
+layout_mode = 0
 offset_left = -78.0
 offset_top = 30.0
 offset_right = 97.0
@@ -84,11 +96,17 @@ offset_bottom = 53.0
 text = "Number of mistakes:"
 
 [node name="DateLabel" type="Label" parent="HomeLabels"]
+layout_mode = 0
 offset_left = 268.0
 offset_top = 30.0
 offset_right = 443.0
 offset_bottom = 53.0
 text = "Date and time:"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 5
+script = ExtResource("5_dugkq")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="hard_stop_timer" to="." method="_on_hard_stop_timer_timeout"]
 [connection signal="pressed" from="HomeLabels/StartButton" to="." method="_on_start_button_pressed"]

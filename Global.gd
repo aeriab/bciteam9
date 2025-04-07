@@ -8,9 +8,17 @@ var num_mistakes: int = 0
 
 var diagnostic_scores: Array[float]
 
-func new_delay_time(delay):
-	num_circles_popped += 1
-	total_delay += delay
+var deleting_sequence = false
+
+var green_is_here: bool = false
+
+#func new_delay_time(delay):
+	#num_circles_popped += 1
+	#total_delay += delay
+	#average_delay = total_delay / float(num_circles_popped)
+	#print(str(average_delay) + " seconds")
+
+func new_delay_time():
 	average_delay = total_delay / float(num_circles_popped)
 	print(str(average_delay) + " seconds")
 

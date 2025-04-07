@@ -9,9 +9,19 @@ func choose_color(color):
 
 func _process(delta):
 	timeVal += delta
-
-func _input(event):
-	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
-		Global.new_delay_time(timeVal)
-		Global.num_mistakes -= 1
+	if Global.deleting_sequence:
+		Global.new_delay_time()
+		Global.deleting_sequence = false
+		if Global.green_is_here:
+			Global.num_mistakes += 1
+			Global.total_delay += 1.0
+			Global.num_circles_popped += 1
 		queue_free()
+		
+
+#func _input(event):
+	#if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+		#Global.new_delay_time(timeVal)
+		#Global.num_mistakes -= 1
+		#queue_free()
+		#Global.deleting_sequence = false
